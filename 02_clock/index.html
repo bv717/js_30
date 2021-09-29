@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Scoped CSS Variables and JS</title>
+    </head>
+    <body>
+        <div class="clock">
+            <div class="clock-face">
+                <div class="hand hour-hand"></div>
+                <div class="hand min-hand"></div>
+                <div class="hand second-hand"></div>
+            </div>
+        </div>
+
+        <style>
+            html{
+                background: lightpink;
+                background-size: cover;
+                font-family: 'helvetica neue';
+                text-align: center;
+                font-size: 10px;
+            }
+
+            body {
+                margin: 0;
+                font-size: 2rem;
+                display: flex;
+                flex: 1;
+                min-height: 100vh;
+                align-items: center;
+            }
+
+            .clock{
+                width: 30rem;
+                height: 30rem;
+                border: 20px solid mistyrose;
+                border-radius: 50%;
+                margin: 50px auto;
+                position: relative;
+                padding: 2rem;
+                box-shadow: 
+                0 0 0 4px mistyrose,
+                inset 0 0 0 3px #EFEFEF,
+                inset 0 0 10px mistyrose,
+                0 0 10px mistyrose;
+            }
+            .clock-face {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                transform: translateY(-3px);
+                
+            }
+            .hand {
+                width: 50%;
+                height: 6px;
+                background: mistyrose;
+                position: absolute;
+                top: 50%; 
+                transform-origin: 100%;
+                transform: rotate(10deg);
+            }
+        </style>
+
+        <script>
+            var secondHand = document.querySelector(".second-hand");
+            var minHand = document.querySelector(".min-hand");
+            var hourHand = document.querySelector(".hour-hand");
+
+            var date_time = new Date();
+
+            var x = 90 + date_time.getSeconds() * (360 / 60);
+            var y = 90 + date_time.getMinutes() * (360 / 60); 
+            var z = 90 + date_time.getHours() * (360 / 24);
+
+            secondHand.style.transform = `rotate(${x}deg)`;
+            minHand.style.transform = `rotate(${y}deg)`;
+            hourHand.style.transform = `rotate(${z}deg)`;
+            
+            setInterval(function() {
+                x += 6
+                secondHand.style.transform = `rotate(${x}deg)`;
+                if (x == 360) {
+                    x = 0
+                }
+            }, 1000);
+
+            setInterval(function() {
+                y += 6
+                minHand.style.transform = `rotate(${y}deg)`;
+                if (y == 360) {
+                    y = 0
+                }
+            }, 60000);
+
+            setInterval(function() {
+                z += 6
+                hourHand.style.transform = `rotate(${z}deg)`;
+                if (z == 360) {
+                    z = 0
+                }
+            }, 3600000);
+        </script>
+    </body>
+</html>
