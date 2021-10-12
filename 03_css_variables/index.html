@@ -61,22 +61,20 @@
   </style>
 
   <script>
-    //document.body.style.setProperty('--base', 'pink');
-    var base_input = document.getElementById('base'),
-        blur_input = document.getElementById('blur'),
-        spacing_input = document.getElementById('spacing');
     
-    base_input.addEventListener('change', (e) => {
-      document.body.style.setProperty('--base', base_input.value);
+    var css_variables = ['base', 'blur', 'spacing'];
+    var size = ''
+
+    css_variables.forEach(item => {
+      var element = document.getElementById(item);
+      element.addEventListener('change', () => {
+        if (element.dataset.sizing) {
+          size = element.dataset.sizing
+        }
+        document.body.style.setProperty(`--${item}`, element.value + size);
+      });
     });
 
-    blur_input.addEventListener('change', (e) => {
-      document.body.style.setProperty('--blur', blur_input.value + 'px');
-    });
-
-    spacing_input.addEventListener('change', (e) => {
-      document.body.style.setProperty('--spacing', spacing_input.value + 'px');
-    });
   </script>
 
 </body>
