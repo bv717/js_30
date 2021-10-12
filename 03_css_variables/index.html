@@ -62,16 +62,14 @@
 
   <script>
     
-    var css_variables = ['base', 'blur', 'spacing'];
-    var size = ''
+    //var css_variables = ['base', 'blur', 'spacing'];
+    const inputs = document.querySelectorAll('.controls input');
 
-    css_variables.forEach(item => {
-      var element = document.getElementById(item);
+    inputs.forEach(element => {
       element.addEventListener('change', () => {
-        if (element.dataset.sizing) {
-          size = element.dataset.sizing
-        }
-        document.body.style.setProperty(`--${item}`, element.value + size);
+        var size = element.dataset.sizing || '';
+
+        document.body.style.setProperty(`--${element.name}`, element.value + size);
       });
     });
 
