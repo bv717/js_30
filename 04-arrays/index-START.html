@@ -92,15 +92,23 @@
     console.log(result);
     // 8. Reduce Exercise
     // Sum up the instances of each of these
-    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-    console.log(data.sort());
+    const data = ['car', 'car', 'ford' ,'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    data.sort();
+
+    var res = {};
+
     result = data.reduce(function(prev, curr, index){
-      console.log(data[index], index);
-      if (data[index] == data[index-1]) {
+      if (data[index] == data[index+1]) {
         return prev + 1;
       }
-    }, 0);
-    console.log(result);
+      else {
+        res[data[index]] = prev;
+        return 1;
+      }
+    }, 1);
+
+    console.log(res);
   </script>
 </body>
 </html>
